@@ -4,8 +4,8 @@ On this tutorial we will create an API using Python 3 and MongoDB
 
 ## Requirements
 
-* [Python 3][python3_download]
-* [MongoDB][mongodb_download]
+* [Python3](https://www.python.org/downloads/)
+* [MongoDB](https://www.mongodb.com/)
 
 ## Getting Started
 
@@ -26,7 +26,7 @@ cd my-vir-env-py-mon
 3. Clone this project
 
 ```bash
-git clone 
+git clone https://github.com/arturoaviles/python-mongodb
 ```
 
 4. Install dependencies
@@ -68,8 +68,7 @@ python app.py
 This sample code is licensed under MIT
 Full license text is available in [LICENSE](LICENSE).
 
-[python3_download]:(https://www.python.org/downloads/)
-[mongodb_download]:(https://www.mongodb.com/)
+
 
 
 

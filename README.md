@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 5. Make a copy of the env.sample to .env
 
-```
+```bash
 cp env.sample .env
 ```
 
@@ -50,10 +50,24 @@ DATABASE=Your_DB_Name
 PASSWORD=Your_DB_Pass
 ```
 
+7. Run Mongo
 
-7. Run the API
+Make sure to run in a terminal:
 
+```bash
+mongod
 ```
+
+And then in another (If you want to interact with the DB direclty):
+
+```bash
+mongo
+```
+
+
+8. Run the API
+
+```bash
 python app.py
 ```
 

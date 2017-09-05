@@ -32,6 +32,26 @@ class Student(Resource):
 		    output = "No such student"
 		return jsonify({'result' : output})
 
+	def post(self):
+	        students = mongo.db.students
+	        student_id = request.json['student_id']
+	        first_name = request.json['first_name']
+	        last_name = request.json['last_name']
+
+	        object_id = students.insert({
+	         	'student_id': student_id, 
+	         	'first_name': first_name,
+	         	'last_name': last_name
+	        })
+	        
+	        new_student = students.find_one({'_id': object_id })
+	        output = output = {
+				'student_id': new_student['student_id'], 
+				'first_name': new_student['first_name'],
+				'last_name': new_student['last_name']
+			}
+	        return jsonify({'result' : output})
+
 class StudentList(Resource):
 	def get(self):
 		students = mongo.db.students
@@ -49,13 +69,13 @@ class Home(Resource):
 		output = {
 			"1. Home": "/",
 			"2. Students": "/students",
-			"3. Find Student": "/student/<student_id>"
+			"3. Find Student": "/students/<student_id>"
 		}
 		return jsonify({'instructions' : output})
 
 api.add_resource(Home, '/')
 api.add_resource(StudentList, '/students')
-api.add_resource(Student, '/student/<string:student_id>')
+api.add_resource(Student, '/students/<string:student_id>')
 
 if __name__ == '__main__':
     app.run(debug=True)

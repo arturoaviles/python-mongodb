@@ -27,6 +27,7 @@ cd my-vir-env-py-mon
 
 ```bash
 git clone https://github.com/arturoaviles/python-mongodb
+cd python-mongodb
 ```
 
 4. Install dependencies

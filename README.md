@@ -68,7 +68,7 @@ mongo
 8. Run the API
 
 ```bash
-python app.py
+python server.py
 ```
 
 ## More Tutorials

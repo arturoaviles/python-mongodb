@@ -14,7 +14,7 @@ api = Api(app)
 app.config['MONGO_DBNAME'] = os.environ.get("DB_NAME")
 app.config['MONGO_URI'] = os.environ.get("MONGO_URI")
 
-app.url_map.strict_slashes = False # Disable redirecting on POST method from /star to /star/
+app.url_map.strict_slashes = False # Disable redirecting on POST method from /student to /student/
 
 mongo = PyMongo(app)
 

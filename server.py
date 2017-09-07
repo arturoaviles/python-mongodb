@@ -30,27 +30,44 @@ class Student(Resource):
 			}
 		else:
 		    output = "No such student"
-		return jsonify({'result' : output})
+		return jsonify({'result': output})
 
+	def delete(self, student_id):
+		students = mongo.db.students
+		result = students.delete_one({'student_id': student_id})
+		if result.deleted_count == 1:
+			output = "Student with id " + student_id + " deleted"
+		else:
+			output = "No such student"
+		return jsonify({'result': output})
+
+	'''
+	def put(self, student_id):
+		args = parser.parse_args()
+		print(args)
+	'''
+	
+	'''
 	def post(self):
-	        students = mongo.db.students
-	        student_id = request.json['student_id']
-	        first_name = request.json['first_name']
-	        last_name = request.json['last_name']
+		students = mongo.db.students
+		student_id = request.json['student_id']
+		first_name = request.json['first_name']
+		last_name = request.json['last_name']
+		object_id = students.insert({
+			'student_id': student_id, 
+			'first_name': first_name,
+			'last_name': last_name
+			})
+		new_student = students.find_one({'_id': object_id })
+		output = output = {
+		'student_id': new_student['student_id'], 
+		'first_name': new_student['first_name'],
+		'last_name': new_student['last_name']
+		}
+		return jsonify({'result' : output})
+	'''
+	
 
-	        object_id = students.insert({
-	         	'student_id': student_id, 
-	         	'first_name': first_name,
-	         	'last_name': last_name
-	        })
-	        
-	        new_student = students.find_one({'_id': object_id })
-	        output = output = {
-				'student_id': new_student['student_id'], 
-				'first_name': new_student['first_name'],
-				'last_name': new_student['last_name']
-			}
-	        return jsonify({'result' : output})
 
 class StudentList(Resource):
 	def get(self):
@@ -64,18 +81,20 @@ class StudentList(Resource):
 		    })
 		return jsonify({'result' : output})
 
+
 class Home(Resource):
 	def get(self):
 		output = {
 			"1. Home": "/",
-			"2. Students": "/students",
-			"3. Find Student": "/students/<student_id>"
+			"2. Students": "/api/v1.0/students",
+			"3. Find Student": "/api/v1.0/students/<student_id>"
 		}
 		return jsonify({'instructions' : output})
 
 api.add_resource(Home, '/')
-api.add_resource(StudentList, '/students')
-api.add_resource(Student, '/students/<string:student_id>')
+api.add_resource(StudentList, '/api/v1.0/students')
+api.add_resource(Student, '/api/v1.0/students/<string:student_id>')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
